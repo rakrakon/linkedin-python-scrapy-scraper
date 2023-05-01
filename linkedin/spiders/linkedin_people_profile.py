@@ -161,6 +161,3 @@ class LinkedInPeopleProfileSpider(scrapy.Spider):
             item['education'].append(education)
 
         yield item
-        
-    
-
