@@ -9,9 +9,12 @@ class LinkedInPeopleProfileSpider(scrapy.Spider):
 
     def start_requests(self):
         profile_list = ['giladbornstein']
+        headers = {
+            'Cookie': 'sessionid=AQEDAUMcugcDXRMQAAABh9zI1zoAAAGIANVbOlYAo32cdm93lyrY0gTk-dDRRmyCXrHzzmgY5jMHSHO-Jc997g8vzAzuAQALiZOomoCirtiqmCEd3CAqMWZeMKHSv5bRSXj_hclrOTILIkvUNSsvEuwI',
+        }
         for profile in profile_list:
             linkedin_people_url = f'https://www.linkedin.com/in/{profile}/' 
-            yield scrapy.Request(url=linkedin_people_url, callback=self.parse_profile, meta={'profile': profile, 'linkedin_url': linkedin_people_url})
+            yield scrapy.Request(url=linkedin_people_url, callback=self.parse_profile, meta={'profile': profile, 'linkedin_url': linkedin_people_url}, headers=headers)
 
     def parse_profile(self, response):
         item = {}
